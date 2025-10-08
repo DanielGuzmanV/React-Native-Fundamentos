@@ -11,14 +11,15 @@ export default function Layout() {
     <View className="flex-1">
       <Stack
         screenOptions={{
-          headerStyle: { backgroundColor: "white" },
+          headerStyle: { backgroundColor: "#ffff" },
           headerTintColor: "black",
           headerTitle: "",
+
           headerLeft: () => (
             <View className="p-2 flex-row items-center">
               <Logo />
               <Text className="ml-2 font-bold text-xl text-sky-300">
-                Fundamentos de React
+                React Native
               </Text>
             </View>
           ),
