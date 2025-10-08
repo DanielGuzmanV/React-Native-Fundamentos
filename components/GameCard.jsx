@@ -11,23 +11,44 @@ export function GameCard({dataGame}) {
   return (
 
     <Link asChild href={`/${dataGame.slug}`}>
-      <StyledPressable className="active:opacity-70 border border-white/50
-        active:border-black mb-4 mx-3 bg-sky-300/50 p-2 rounded-xl">
+      <StyledPressable 
+        className="active:opacity-70 border border-blue-100
+        active:border-black mb-4 mx-3 bg-white p-2 rounded-xl"
+      >
         <View className="flex-row gap-3" key={dataGame.slug}>
-          <Image 
-            alt='Imagen del juego'
-            source={{ uri: dataGame.image }} 
-            style={styles.image} 
-          />
+          <View className="bg-slate-100 flex-col">
+            <View>
+              <Image 
+                alt={dataGame.title}
+                source={{ uri: dataGame.image }} 
+                style={styles.image} 
+              />
+            </View>
+            <View className="bg-slate-50 border border-gray-300 p-2 m-2 rounded-lg">
+              <Text className="text-black">
+                {dataGame.releaseDate}
+              </Text>
+            </View>
+          </View>
 
           <View className="flex-shrink">
-            <Text className="mb-2" style={styles.title}>
-              {dataGame.title}
-            </Text>
-            
-            <Score score={dataGame.score} maxScore={100}/>
+            <View className="bg-indigo-100 p-2 rounded-lg">
+              <Text className="mb-2" style={styles.title}>
+                {dataGame.title}
+              </Text>
+            </View>
 
-            <Text className="mt-2 flex-shrink" style={styles.description}>
+            <View className="flex-row mt-4">
+              <Text className="mr-4 mt-1 font-bold text-base">
+                Puntuacion:
+              </Text>
+              <Score score={dataGame.score} maxScore={100}/>
+            </View>
+
+            <Text className="mt-2 flex-shrink font-bold text-base">
+              Descripcion:
+            </Text>
+            <Text className="flex-shrink" style={styles.description}>
               {dataGame.description}
             </Text>
           </View>
@@ -46,7 +67,7 @@ export function AnimatedGameCard({game, index}) {
     Animated.timing(opacity, {
       toValue: 1,
       duration: 500,
-      delay: index * 500,
+      delay: index * 200,
       useNativeDriver: true,
 
     }).start();
@@ -57,11 +78,10 @@ export function AnimatedGameCard({game, index}) {
       <GameCard  dataGame={game}/>
     </Animated.View>
   )
-
 }
 
+// Estilos:
 const styles = StyleSheet.create({
-  
   colorText: {
     color: 'black'
   },
@@ -82,14 +102,6 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     color: 'black',
-  },
-  score: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'green',
-    marginTop: 10,
   }
-
-
 });
 

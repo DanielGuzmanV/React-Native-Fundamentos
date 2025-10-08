@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import {ActivityIndicator, FlatList } from 'react-native';
+import {ActivityIndicator, FlatList, View, Text } from 'react-native';
 import Screen from './Screen';
 
 import { getLatestGames } from '../lib/metacritic';
@@ -9,8 +9,8 @@ export function Main() {
   const [games, setGames] = useState([]);
 
   useEffect( () => {
-    getLatestGames().then( (games) => {
-      setGames(games);
+    getLatestGames().then( (valueGames) => {
+      setGames(valueGames);
     }).catch( (error) => {
       console.error('error al obtener los juegos', error)
     })
@@ -19,8 +19,14 @@ export function Main() {
 
   return (
     <Screen>
-      {games.length === 0 ? (
-        <ActivityIndicator color={'black'} size={'large'}/>
+      {games.length === 0 
+      ? (
+        <View>
+          <ActivityIndicator color={'black'} size={'large'}/>
+          <Text>
+            Ops... parece que no hay ningun juego
+          </Text>
+        </View>
       ) : (
         <FlatList
           data={games}
